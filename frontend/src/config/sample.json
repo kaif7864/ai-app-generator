@@ -1,0 +1,34 @@
+{
+  "appName": "Project Management Platform",
+  "layout": [
+    {
+      "type": "csv_importer",
+      "id": "csvImporter",
+      "endpoint": "http://localhost:5000/api/dynamic/project_data"
+    },
+    {
+      "type": "form",
+      "id": "taskForm",
+      "title": "Add New Project Task",
+      "endpoint": "http://localhost:5000/api/dynamic/tasks",
+      "method": "POST",
+      "fields": [
+        {
+          "name": "task_title",
+          "type": "text",
+          "label": "Task Name",
+          "required": true,
+          "placeholder": "e.g. Design UI"
+        },
+        {
+          "name": "priority",
+          "type": "text",
+          "label": "Priority Level",
+          "required": true,
+          "placeholder": "High/Medium/Low"
+        }
+      ],
+      "submitLabel": "Create Task"
+    }
+  ]
+}
