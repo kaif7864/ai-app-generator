@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const SchemaExplorer = ({ rootConfig }: any) => {
   const tables = rootConfig?.database?.tables || [];

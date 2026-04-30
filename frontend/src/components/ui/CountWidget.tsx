@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const CountWidget = ({ table, rootConfig }: any) => {
   const [count, setCount] = useState(0);
@@ -7,7 +9,7 @@ export const CountWidget = ({ table, rootConfig }: any) => {
     const token = localStorage.getItem('token');
     if (!table || !token) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/data/${table}`, {
+      const res = await fetch(`${API_BASE}/api/data/${table}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();

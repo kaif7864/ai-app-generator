@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../ui/Button';
 import toast from 'react-hot-toast';
 
-export const CSVImporter = ({ endpoint, onImportSuccess }: any) => {
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+export const CSVImporter = ({ table, endpoint, onImportSuccess }: any) => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 

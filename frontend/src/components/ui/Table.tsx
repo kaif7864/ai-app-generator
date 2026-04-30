@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const Table = ({ title, columns, table, endpoint, rootConfig }: any) => {
   const [data, setData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
 
   let finalColumns = columns;
   if (!columns && table && rootConfig?.database?.tables) {
@@ -15,7 +16,7 @@ export const Table = ({ title, columns, table, endpoint, rootConfig }: any) => {
     }
   }
 
-  const finalEndpoint = endpoint || `http://localhost:5000/api/data/${table}`;
+  const finalEndpoint = endpoint || `${API_BASE}/api/data/${table}`;
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');

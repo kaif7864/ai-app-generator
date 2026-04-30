@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DynamicRenderer } from '../DynamicRenderer';
 import { Button } from './Button';
 import toast from 'react-hot-toast';
 import { useTranslation } from '../../context/LanguageContext';
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const Form = ({ title, fields, table, submitLabel, endpoint, method, rootConfig }: any) => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,7 @@ export const Form = ({ title, fields, table, submitLabel, endpoint, method, root
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
@@ -33,7 +35,7 @@ export const Form = ({ title, fields, table, submitLabel, endpoint, method, root
     });
 
     try {
-      const finalEndpoint = endpoint || `http://localhost:5000/api/data/${table}`;
+      const finalEndpoint = endpoint || `${API_BASE}/api/data/${table}`;
       const res = await fetch(finalEndpoint, {
         method: method || 'POST',
         headers: { 

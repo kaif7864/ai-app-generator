@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { DynamicRenderer } from './components/DynamicRenderer'
 import defaultAppConfig from './config/sample.json'
 import { useTranslation } from './context/LanguageContext'
-import { Button } from './components/ui/Button'
 import { Auth } from './components/ui/Auth'
 import { NotificationSystem, triggerAppEvent } from './components/ui/NotificationSystem'
 import toast from 'react-hot-toast'
+
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 function App() {
   const { lang, setLang } = useTranslation();
@@ -13,7 +14,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'));
   const [appState, setAppState] = useState<'editor' | 'preview'>('editor');
   const [configInput, setConfigInput] = useState(JSON.stringify(defaultAppConfig, null, 2));
-  const [currentConfig, setCurrentConfig] = useState(defaultAppConfig);
+  const [currentConfig, setCurrentConfig] = useState<any>(defaultAppConfig);
   const [loading, setLoading] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0); // For forcing re-fetches
 
@@ -29,7 +30,7 @@ function App() {
     try {
       const parsed = JSON.parse(configInput);
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/system/generate', {
+      const res = await fetch(`${API_BASE}/api/system/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(parsed)
@@ -56,7 +57,7 @@ function App() {
     triggerAppEvent('AI: Generating smart mock data...');
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/system/fill-mock-data', {
+      const res = await fetch(`${API_BASE}/api/system/fill-mock-data`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(currentConfig)

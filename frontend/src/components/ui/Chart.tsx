@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const Chart = ({ title, table }: any) => {
   const mockData = [

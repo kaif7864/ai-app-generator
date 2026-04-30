@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const NotificationSystem = () => {
   const [logs, setLogs] = useState<{id: number, msg: string, time: string}[]>([]);

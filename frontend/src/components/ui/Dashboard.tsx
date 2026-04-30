@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { DynamicRenderer } from '../DynamicRenderer';
 
 export const Dashboard = ({ title, widgets, rootConfig }: any) => {
