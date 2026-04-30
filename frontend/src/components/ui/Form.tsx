@@ -27,7 +27,7 @@ export const Form = ({ title, fields, table, submitLabel, endpoint, method, root
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+    const data: any = Object.fromEntries(formData.entries());
     const token = localStorage.getItem('token');
     
     finalFields?.forEach((f: any) => {
