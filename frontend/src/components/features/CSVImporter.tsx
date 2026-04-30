@@ -29,8 +29,9 @@ export const CSVImporter = ({ table, endpoint, onImportSuccess }: any) => {
       });
 
       try {
+        const finalEndpoint = endpoint || `${API_BASE}/api/data/${table}`;
         for (const record of parsedData) {
-          await fetch(endpoint || 'http://localhost:5000/api/dynamic/csv_import', {
+          await fetch(finalEndpoint, {
             method: 'POST',
             headers: { 
               'Content-Type': 'application/json',

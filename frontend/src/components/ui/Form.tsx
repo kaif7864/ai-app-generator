@@ -31,7 +31,10 @@ export const Form = ({ title, fields, table, submitLabel, endpoint, method, root
     const token = localStorage.getItem('token');
     
     finalFields?.forEach((f: any) => {
-      if (f.type === 'number' && data[f.name]) data[f.name] = Number(data[f.name]);
+      const val = data[f.name];
+      if (f.type === 'number' && val) {
+        data[f.name] = Number(val);
+      }
     });
 
     try {
